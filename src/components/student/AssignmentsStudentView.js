@@ -22,12 +22,10 @@ const AssignmentsStudentView = (props) => {
                 setAssignments(assignments);
                 console.log(assignments);
             } else {
-                console.log("Wait this didnt work wtf")
                 const json = await response.json();
                 setMessage("response error: "+json.message);
             }
         } catch (err) {
-            console.log("hello?????")
             setMessage("network error: "+err);
         }
     }
@@ -36,8 +34,28 @@ const AssignmentsStudentView = (props) => {
     },  []);
      
     return(
-        <> 
-            <h3>Not implemented</h3>   
+        <>
+            <h1>Assignments</h1>
+            <table className="Center">
+                <thead>
+                <tr>
+      <th>Course ID</th>
+      <th>Assignment Title</th>
+      <th>Due Date</th>
+      <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                {assignments.map((a) => (
+                    <tr key={a.assignmentId}>
+                        <td>{a.courseId}</td>
+                        <td>{a.title}</td>
+                        <td>{a.dueDate}</td>
+                        <td>{a.score}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         </>
     );
 }
