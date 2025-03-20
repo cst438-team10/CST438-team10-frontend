@@ -6,7 +6,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-  border-spacing: 10px;
+  margin-top: 50px;
 }
 
 .App-table {
@@ -26,4 +26,29 @@
 
 .App-link {
   color: #61dafb;
+}
+
+table{
+  background-color: aliceblue;
+  border-collapse: collapse;
+  border-bottom: 5px solid #3d4f74;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+th:first-child{
+  border-top-left-radius: 10px;
+}
+th:last-child{
+  border-top-right-radius: 10px;
+}
+th{
+  background-color: #3d4f74;
+  color: aliceblue;
+}
+td, th{
+  margin: 0;
+  padding: 10px;
+}
+tr:nth-child(odd){
+  background-color: rgb(197, 220, 240);
 }
