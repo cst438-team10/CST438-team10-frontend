@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {SERVER_URL} from "../../Constants";
 
 // student views a list of assignments and assignment grades 
 // use the URL  /assignments?studentId= &year= &semester=
@@ -8,7 +9,31 @@ import React, {useState} from 'react';
 // display a table with columns  Course Id, Assignment Title, Assignment DueDate, Score
 
 const AssignmentsStudentView = (props) => {
-    
+
+    const [ assignments, setAssignments ] = useState([ ]);
+
+    const [ message, setMessage ] = useState('');
+
+    const  fetchAssignments = async () => {
+        try {
+            const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=2025&semester=Spring`);
+            if (response.ok) {
+                const assignments = await response.json();
+                setAssignments(assignments);
+                console.log(assignments);
+            } else {
+                console.log("Wait this didnt work wtf")
+                const json = await response.json();
+                setMessage("response error: "+json.message);
+            }
+        } catch (err) {
+            console.log("hello?????")
+            setMessage("network error: "+err);
+        }
+    }
+    useEffect( () => {
+        fetchAssignments();
+    },  []);
      
     return(
         <> 
