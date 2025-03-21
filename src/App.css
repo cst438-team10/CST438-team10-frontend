@@ -31,7 +31,7 @@
 table{
   background-color: aliceblue;
   border-collapse: collapse;
-  border-bottom: 5px solid #3d4f74;
+  border-bottom: 5px solid #01579b;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -42,13 +42,24 @@ th:last-child{
   border-top-right-radius: 10px;
 }
 th{
-  background-color: #3d4f74;
+  background-color: #01579b;
   color: aliceblue;
 }
 td, th{
   margin: 0;
   padding: 10px;
+
+}
+td{
+  color: #1976d2;
 }
 tr:nth-child(odd){
   background-color: rgb(197, 220, 240);
+}
+.rowLinks{
+  text-decoration: none;
+  color: #42a5f5;
+}
+.rowLinks:hover{
+  color: #1565c0;
 }
