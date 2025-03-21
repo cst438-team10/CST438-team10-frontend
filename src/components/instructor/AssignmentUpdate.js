@@ -36,7 +36,7 @@ const AssignmentUpdate = (props)  => {
             <DialogTitle>Update Assignment</DialogTitle>
             <DialogContent  style={{paddingTop: 20}} >
               <TextField style={{padding:10}} fullWidth label="title" name="title" value={assignment.title} onChange={(e)=>{setAssingment(prevAssignment=>({...prevAssignment, title: e.target.value}))}}/> 
-              <TextField style={{padding:10}} type='date' fullWidth label="credits" name="credits" value={assignment.dueDate} onChange={(e)=>{setAssingment(prevAssignment=>({...prevAssignment, dueDate: e.target.value}))}} /> 
+              <TextField style={{padding:10}} type='date' fullWidth label="due date" name="credits" value={assignment.dueDate} onChange={(e)=>{setAssingment(prevAssignment=>({...prevAssignment, dueDate: e.target.value}))}} /> 
             </DialogContent>
             <DialogActions>
               <Button onClick={()=>saveEdit()}>Save</Button>

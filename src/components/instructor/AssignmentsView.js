@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import AssignmentUpdate from './AssignmentUpdate';
+import AssignmentAdd from './AssignmentAdd';
 // instructor views assignments for their section
 // use location to get the section value 
 // 
@@ -81,7 +82,7 @@ const AssignmentsView = () => {
                 ))}
                 </tbody>
             </table>
-
+            <AssignmentAdd secNo={secNo} refreshFlag={refreshFlag} setRefreshFlag={setRefreshFlag}/>
             <Dialog open={openDeleteDialog}>
                 <DialogTitle>Delete Assignment</DialogTitle>
                 <DialogContent  style={{paddingTop: 20}} >
@@ -90,8 +91,8 @@ const AssignmentsView = () => {
                 <DialogActions>
                     <Button variant='outlined' onClick={()=>{
                         deleteAssignments(deletingAssignment.id)
-                    }}></Button>
-                    <Button color="secondary" onClick={()=>{
+                    }}  color="error">Delete</Button>
+                    <Button variant='outlined' onClick={()=>{
                         setDeletingAssignment({})
                         setOpenDeleteDialog(false)}}>Cancel</Button>
                 </DialogActions>
