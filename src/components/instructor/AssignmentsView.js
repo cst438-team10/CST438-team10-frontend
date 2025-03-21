@@ -6,6 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import AssignmentUpdate from './AssignmentUpdate';
 // instructor views assignments for their section
 // use location to get the section value 
 // 
@@ -17,6 +18,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 const AssignmentsView = () => {
     const [assignments, setAssignments] = useState()
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
+    const [deletingAssignment, setDeletingAssignment] = useState({})
+    const [refreshFlag, setRefreshFlag] = useState(-1)
     const location = useLocation()
     const {secNo, title} = location.state || {}
     const tableHeaders = ["Id", "Title", "Due Date", "", "", ""]
@@ -35,7 +38,15 @@ const AssignmentsView = () => {
 
     const deleteAssignments = async(id)=>{
         try{
-
+            let response = await fetch(`${SERVER_URL}/assignments/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }})
+            if (response.status === 200){
+                getAssignments()
+                setOpenDeleteDialog(false)
+            }
         }catch (err){
             alert(`${err}`)
         }
@@ -43,15 +54,15 @@ const AssignmentsView = () => {
 
     useEffect(()=>{
         getAssignments()
-    }, [])
+    }, [, refreshFlag])
     return(
         <> 
            <h3>Assignments for <br></br>{title}</h3>
             <table className='Center'>
                 <thead>
                     <tr>
-                        {tableHeaders.map(th=>(
-                            <th>{th}</th>
+                        {tableHeaders.map((th, idx)=>(
+                            <th key={idx}>{th}</th>
                         ))}
                     </tr>
                 </thead>
@@ -62,15 +73,28 @@ const AssignmentsView = () => {
                         <td>{assignment.title}</td>
                         <td>{assignment.dueDate}</td>
                         <td><Button variant="outlined">Grade</Button></td>
-                        <td><Button variant="outlined">Edit</Button></td>
-                        <td><Button variant="outlined" onClick={()=>deleteAssignments(assignment.id)}>Delete</Button></td>
+                        <td><AssignmentUpdate assignment={assignment} refreshFlag={refreshFlag} setRefreshFlag={setRefreshFlag}/></td>
+                        <td><Button variant="outlined" onClick={()=>{
+                            setDeletingAssignment(assignment)
+                            setOpenDeleteDialog(true)}}>Delete</Button></td>
                     </tr>
                 ))}
                 </tbody>
             </table>
 
             <Dialog open={openDeleteDialog}>
-
+                <DialogTitle>Delete Assignment</DialogTitle>
+                <DialogContent  style={{paddingTop: 20}} >
+                    Would you like to delete {deletingAssignment.title}?
+                </DialogContent>
+                <DialogActions>
+                    <Button variant='outlined' onClick={()=>{
+                        deleteAssignments(deletingAssignment.id)
+                    }}></Button>
+                    <Button color="secondary" onClick={()=>{
+                        setDeletingAssignment({})
+                        setOpenDeleteDialog(false)}}>Cancel</Button>
+                </DialogActions>
             </Dialog>
         </>
     );

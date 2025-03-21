@@ -17,7 +17,6 @@ import { Link } from 'react-router-dom';
 const InstructorSectionsView = (props) => {
     const [sections, setSections] = useState([])
     const [myName, setMyName] = useState("")
-    const navigate = useNavigate()
     const tableHeaders = ["Section No", "Section ID", "Course Id", "Title", "Semester", "Days+Times", "Building", "Room", "Sec No", "", ""]
     const location = useLocation()
     const term = location.state
