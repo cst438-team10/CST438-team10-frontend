@@ -10,7 +10,6 @@ const InstructorLayout = () => {
       </nav>
       <h1>Instructor Home</h1>
       Manage assignments and grades.
-
       <Outlet />
     </>
   )
