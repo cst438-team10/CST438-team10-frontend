@@ -23,7 +23,9 @@ function App() {
   // when login is implemented, the user type will come from the logged in user's ROLE.
 
 
+
   const userType = 'STUDENT'; // change to INSTRUCTOR or STUDENT for testing.
+
 
 
   if (userType==='ADMIN') {
