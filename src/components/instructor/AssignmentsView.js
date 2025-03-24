@@ -8,6 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import AssignmentUpdate from './AssignmentUpdate';
 import AssignmentAdd from './AssignmentAdd';
+import AssignmentGrade from "./AssignmentGrade";
 // instructor views assignments for their section
 // use location to get the section value 
 // 
@@ -57,7 +58,7 @@ const AssignmentsView = () => {
         getAssignments()
     }, [, refreshFlag])
     return(
-        <> 
+        <>
            <h3>Assignments for <br></br>{title}</h3>
             <table className='Center'>
                 <thead>
@@ -73,7 +74,7 @@ const AssignmentsView = () => {
                         <td>{assignment.id}</td>
                         <td>{assignment.title}</td>
                         <td>{assignment.dueDate}</td>
-                        <td><Button variant="outlined">Grade</Button></td>
+                        <td><AssignmentGrade assignment={assignment} refreshFlag={refreshFlag} setRefreshFlag={setRefreshFlag}/></td>
                         <td><AssignmentUpdate assignment={assignment} refreshFlag={refreshFlag} setRefreshFlag={setRefreshFlag}/></td>
                         <td><Button variant="outlined" onClick={()=>{
                             setDeletingAssignment(assignment)
