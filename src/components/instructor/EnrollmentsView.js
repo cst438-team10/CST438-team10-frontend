@@ -17,6 +17,7 @@ const EnrollmentsView = (props) => {
     const [grades, setGrades ] = useState({});
 
     // fetch enrollments
+    // --
     useEffect(() => {
         fetch(`http://localhost:8080/sections/${secNo}/enrollments`)
         .then(response => {
