@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import {SERVER_URL} from '../../Constants';
+import {SERVER_URL_GRADEBOOK} from '../../Constants';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -22,7 +22,7 @@ const AssignmentAdd = (props)  => {
         }else{
             setErrorMessage("")
             try{
-                let response  = await fetch(`${SERVER_URL}/assignments`,
+                let response  = await fetch(`${SERVER_URL_GRADEBOOK}/assignments`,
                     {
                         method: "POST",
                         headers:{

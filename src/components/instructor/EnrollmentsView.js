@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
-
+import {SERVER_URL_GRADEBOOK} from '../../Constants';
 // instructor view list of students enrolled in a section
 // use location to get section no passed from InstructorSectionsView
 // fetch the enrollments using URL /sections/{secNo}/enrollments
@@ -19,7 +19,7 @@ const EnrollmentsView = (props) => {
     // fetch enrollments
     // --
     useEffect(() => {
-        fetch(`http://localhost:8080/sections/${secNo}/enrollments`)
+        fetch(`${SERVER_URL_GRADEBOOK}/sections/${secNo}/enrollments`)
         .then(response => {
             if(!response.ok){
                 throw new Error('failed to fetch enrollments');
@@ -55,7 +55,7 @@ const EnrollmentsView = (props) => {
         }));
 
         try {
-            const response = await fetch('http://localhost:8080/enrollments', {
+            const response = await fetch(`${SERVER_URL_GRADEBOOK}/enrollments`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

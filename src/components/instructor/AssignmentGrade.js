@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { SERVER_URL } from '../../Constants';
+import { SERVER_URL_GRADEBOOK } from '../../Constants';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
-import AssignmentUpdate from "./AssignmentUpdate";
-import AssignmentAdd from "./AssignmentAdd";
 import {Table} from "@mui/material";
 
 // instructor enters students' grades for an assignment
@@ -27,7 +24,7 @@ const AssignmentGrade = (props) => {
 
     const fetchGrades = async () => {
         try {
-            let response = await fetch(`${SERVER_URL}/assignments/${assignment.id}/grades`);
+            let response = await fetch(`${SERVER_URL_GRADEBOOK}/assignments/${assignment.id}/grades`);
             if (response.ok) {
                 let data = await response.json();
                 setGrades(data);
@@ -42,7 +39,7 @@ const AssignmentGrade = (props) => {
 
     const saveGrades = async () => {
         try {
-            let response = await fetch(`${SERVER_URL}/grades`, {
+            let response = await fetch(`${SERVER_URL_GRADEBOOK}/grades`, {
                 method: "PUT",
                 headers:{
                     'Content-Type': 'application/json',

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
-import {SERVER_URL} from '../../Constants';
-import { useNavigate } from 'react-router-dom';
+import {SERVER_URL_REGISTRAR} from '../../Constants';
 import { Link } from 'react-router-dom';
 
 // instructor views a list of sections they are teaching 
@@ -23,7 +22,7 @@ const InstructorSectionsView = (props) => {
 
     const whoAmI = async() =>{
         try{
-            let response = await fetch(`${SERVER_URL}/user?email=dwisneski@csumb.edu`)
+            let response = await fetch(`${SERVER_URL_REGISTRAR}/user?email=dwisneski@csumb.edu`)
             let data = await response.json()
             setMyName(data.name.split(' ').map(word=>{return word.charAt(0).toUpperCase()+word.slice(1)}).join(' '))
         }catch(err){
@@ -33,11 +32,10 @@ const InstructorSectionsView = (props) => {
 
     const getSections = async()=>{
         try{
-            let response = await fetch(`${SERVER_URL}/sections?email=dwisneski@csumb.edu&year=${term.year}&semester=${term.semester}`)
+            let response = await fetch(`${SERVER_URL_REGISTRAR}/sections?email=dwisneski@csumb.edu&year=${term.year}&semester=${term.semester}`)
             if (response.status === 200){
                 let data = await response.json()
                 setSections(data)
-                console.log(data)
             }
         }catch(err){
             alert(`${err}`)

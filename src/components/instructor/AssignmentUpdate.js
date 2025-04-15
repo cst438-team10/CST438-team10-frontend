@@ -4,7 +4,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button, TextField } from '@mui/material';
-import {SERVER_URL} from '../../Constants';
+import {SERVER_URL_GRADEBOOK} from '../../Constants';
 //  instructor updates assignment title, dueDate 
 //  use an mui Dialog
 //  issue PUT to URL  /assignments with updated assignment
@@ -15,7 +15,7 @@ const AssignmentUpdate = (props)  => {
 
     const saveEdit = async()=>{
       try{
-        let response = await fetch(`${SERVER_URL}/assignments`,
+        let response = await fetch(`${SERVER_URL_GRADEBOOK}/assignments`,
           {
             method: "PUT",
             headers:{

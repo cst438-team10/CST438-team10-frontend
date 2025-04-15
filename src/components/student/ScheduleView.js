@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {SERVER_URL_REGISTRAR} from '../../Constants';
 
 // student can view schedule of sections 
 // use the URL /enrollments?studentId=3&year= &semester=
@@ -17,7 +18,7 @@ const ScheduleView = (props) => {
     const fetchSchedule = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/enrollments?studentId=3&year=${year}&semester=${semester}`
+                `${SERVER_URL_REGISTRAR}/enrollments?studentId=3&year=${year}&semester=${semester}`
             );
             if (!response.ok) {
                 throw new Error('failed to fetch schedule');
@@ -33,7 +34,7 @@ const ScheduleView = (props) => {
     const dropCourse = async (enrollmentId) => {
         try {
             const response = await fetch(
-                `http://localhost:8080/enrollments/${enrollmentId}`,
+                `${SERVER_URL_REGISTRAR}/enrollments/${enrollmentId}`,
                 {
                     method: 'DELETE',
                 }

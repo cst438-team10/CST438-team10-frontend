@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import {SERVER_URL} from '../../Constants';
+import {SERVER_URL_REGISTRAR} from '../../Constants';
 
 // students displays a list of open sections for a 
 // use the URL /sections/open
@@ -23,7 +23,7 @@ const CourseEnroll = (props) => {
     const tableHeaders = ["Course Id", "Title", "Semester", "Days+Times", "Instructor Name", "Instructor Email", "Building", "Room", "Sec No", ""]
     const getOpenSections = async()=>{
         try{
-            let response = await fetch(`${SERVER_URL}/sections/open`)
+            let response = await fetch(`${SERVER_URL_REGISTRAR}/sections/open`)
             const courses = await response.json()
             if(response.status === 200){
                 setOpenSections(courses)
@@ -39,7 +39,7 @@ const CourseEnroll = (props) => {
 
     const getMyEnrollments = async()=>{
         try{
-            let response  = await fetch(`${SERVER_URL}/transcripts?studentId=3`)
+            let response  = await fetch(`${SERVER_URL_REGISTRAR}/transcripts?studentId=3`)
             if (response.status === 200){
                 let data = await response.json()
                 setCurrentEnrollments(data)
@@ -53,7 +53,7 @@ const CourseEnroll = (props) => {
     }
     const enrollMe = async(secNo)=>{
         try{
-            let response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}?studentId=3`, 
+            let response = await fetch(`${SERVER_URL_REGISTRAR}/enrollments/sections/${secNo}?studentId=3`, 
                 {
                     method: 'POST',
                     headers: {
@@ -74,7 +74,7 @@ const CourseEnroll = (props) => {
     }
     const unenrollMe = async()=>{
         try{
-            let response = await fetch(`${SERVER_URL}/enrollments/${unEnrollingSection.enrollmentId}`, 
+            let response = await fetch(`${SERVER_URL_REGISTRAR}/enrollments/${unEnrollingSection.enrollmentId}`, 
                 {
                     method: 'DELETE',
                     headers: {

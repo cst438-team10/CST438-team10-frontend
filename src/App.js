@@ -24,7 +24,7 @@ function App() {
 
 
 
-  const userType = 'STUDENT'; // change to INSTRUCTOR or STUDENT for testing.
+  const userType = 'INSTRUCTOR'; // change to INSTRUCTOR or STUDENT for testing.
 
 
 

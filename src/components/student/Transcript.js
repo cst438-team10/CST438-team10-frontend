@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {SERVER_URL} from "../../Constants";
+import {SERVER_URL_REGISTRAR} from "../../Constants";
 
 // students gets a list of all courses taken and grades
 // use the URL /transcripts?studentId=
@@ -13,7 +13,7 @@ const Transcript = (props) => {
 
     // fetch the transcript
     useEffect(() => {
-        fetch(`${SERVER_URL}/transcripts?studentId=3`)
+        fetch(`${SERVER_URL_REGISTRAR}/transcripts?studentId=3`)
             .then((response) => {
                 if(!response.ok){
                     throw new Error(`failed to fetch transcript: ${response.status}`);

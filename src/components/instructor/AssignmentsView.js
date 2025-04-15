@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {SERVER_URL} from '../../Constants';
+import {SERVER_URL_GRADEBOOK} from '../../Constants';
 import { useLocation } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
@@ -27,7 +27,7 @@ const AssignmentsView = () => {
     const tableHeaders = ["Id", "Title", "Due Date", "", "", ""]
     const getAssignments = async()=>{
         try{
-            let response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`)
+            let response = await fetch(`${SERVER_URL_GRADEBOOK}/sections/${secNo}/assignments`)
             if(response.status === 200){
                 let data = await response.json()
                 setAssignments(data)
@@ -40,7 +40,7 @@ const AssignmentsView = () => {
 
     const deleteAssignments = async(id)=>{
         try{
-            let response = await fetch(`${SERVER_URL}/assignments/${id}`, {
+            let response = await fetch(`${SERVER_URL_GRADEBOOK}/assignments/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
