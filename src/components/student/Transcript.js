@@ -10,10 +10,16 @@ import {SERVER_URL} from "../../Constants";
 const Transcript = (props) => {
 
     const [transcript, setTranscript] = useState([ ]);
-
+    const jwt = sessionStorage.getItem('jwt')
     // fetch the transcript
     useEffect(() => {
-        fetch(`${SERVER_URL}/transcripts?studentId=3`)
+        fetch(`${SERVER_URL}/transcripts`, {
+            method: 'GET',
+            headers:{
+                    'Authorization': jwt
+                }
+            }
+        )
             .then((response) => {
                 if(!response.ok){
                     throw new Error(`failed to fetch transcript: ${response.status}`);

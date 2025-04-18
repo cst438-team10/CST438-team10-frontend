@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import SERVER_URL from './Constants';
+import { SERVER_URL } from './Constants';
 
 const Login = (props) => {
     const[user, setUser] = useState({username:'', password:''});
@@ -21,6 +21,7 @@ const Login = (props) => {
         if (response.ok) {
           const json = await response.json();
           sessionStorage.setItem("jwt", 'Bearer '+json.jwt);
+          sessionStorage.setItem("role", json.role);
           props.setUserType(json.role);
           props.setAuth(true);
           setMessage('');

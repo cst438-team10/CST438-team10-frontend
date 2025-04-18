@@ -14,11 +14,18 @@ const AssignmentsStudentView = (props) => {
     const [year, setYear] = useState()
     const [semester, setSemester] = useState()
     const [ message, setMessage ] = useState('');
+    
+    const jwt = sessionStorage.getItem('jwt')
 
     const  fetchAssignments = async(e) => {
         e.preventDefault()
         try {
-            const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=${year}&semester=${semester}`);
+            const response = await fetch(`${SERVER_URL}/assignments?year=${year}&semester=${semester}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': jwt,
+                }
+            });
             if (response.ok) {
                 const assignments = await response.json();
                 setAssignments(assignments);

@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import {AdminRouter} from './components/admin/AdminLayout';
 import {StudentRouter} from './components/student/StudentLayout';
 import {InstructorRouter} from './components/instructor/InstructorLayout';
@@ -14,8 +14,17 @@ function App() {
   const logout = () => {
     setAuth(false);
     sessionStorage.removeItem("jwt");
+    sessionStorage.removeItem("role")
   }
 
+  useEffect(()=>{
+    const jwt = sessionStorage.getItem('jwt')
+    const role = sessionStorage.getItem('role')
+    if (role && jwt){
+      setAuth(true)
+      setUserType(role)
+    }
+  }, [])
   if (! isAuthenticated) {
       return (
         <Login setAuth={setAuth} setUserType={setUserType} />
