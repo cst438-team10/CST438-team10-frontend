@@ -16,7 +16,7 @@ const AssignmentsStudentView = (props) => {
     const [ message, setMessage ] = useState('');
     
     const jwt = sessionStorage.getItem('jwt')
-
+    console.log(jwt)
     const  fetchAssignments = async(e) => {
         e.preventDefault()
         try {

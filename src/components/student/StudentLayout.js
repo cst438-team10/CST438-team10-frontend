@@ -47,7 +47,7 @@ export const StudentLayout = (props) => {
         <Link to="/">Home</Link> &nbsp;|&nbsp;   
         <Link to="/schedule">View Class Schedule</Link>&nbsp;|&nbsp;  
         <Link to="/addCourse">Enroll in a class</Link>&nbsp;|&nbsp;
-        <Link to="/studentAssignments">View Assignments</Link>&nbsp;|&nbsp;  
+        <Link to="/assignments">View Assignments</Link>&nbsp;|&nbsp;  
         <Link to="/transcript">View Transcript</Link>&nbsp;|&nbsp; 
         <Link to="/logout">Logout</Link>
       </nav>
