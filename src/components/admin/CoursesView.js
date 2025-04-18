@@ -45,6 +45,7 @@ function CoursesView(props) {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization': jwt
               }, 
               body: JSON.stringify(course),
             });
@@ -67,6 +68,7 @@ function CoursesView(props) {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization': jwt
               }, 
               body: JSON.stringify(course),
             });
@@ -89,6 +91,7 @@ function CoursesView(props) {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization': jwt
               }, 
             });
         if (response.ok) {

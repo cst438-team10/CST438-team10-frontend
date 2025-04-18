@@ -20,6 +20,7 @@ const SectionAdd = (props)  => {
         instructorName:'', instructorEmail:''}
      );
 
+    const jwt = sessionStorage.getItem('jwt')
     const editOpen = () => {
         setSection( {secNo:'', courseId:'', secId:'', year:'', semester:'', building:'', room:'', times:'',
         instructorName:'', instructorEmail:''});
@@ -51,6 +52,7 @@ const SectionAdd = (props)  => {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization': jwt
               }, 
               body: JSON.stringify(section),
             });
