@@ -13,7 +13,7 @@ const Transcript = (props) => {
     const jwt = sessionStorage.getItem('jwt')
     // fetch the transcript
     useEffect(() => {
-        fetch(`${SERVER_URL}/transcripts?studentId=3`, {
+        fetch(`${SERVER_URL}/transcripts`, {
             method: 'GET',
             headers:{
                     'Authorization': jwt
