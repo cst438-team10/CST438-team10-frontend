@@ -12,12 +12,18 @@ const ScheduleView = (props) => {
     const [year, setYear] = useState('');
     const [semester, setSemester] = useState('');
     const [schedule, setSchedule] = useState([]);
+    const jwt = sessionStorage.getItem('jwt')
 
     //fetch the schedule
     const fetchSchedule = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/enrollments?studentId=3&year=${year}&semester=${semester}`
+                `http://localhost:8080/enrollments?year=${year}&semester=${semester}`,{
+                    method: 'GET',
+                    headers: {
+                        'Authorization': jwt
+                    }
+                }
             );
             if (!response.ok) {
                 throw new Error('failed to fetch schedule');
@@ -36,6 +42,9 @@ const ScheduleView = (props) => {
                 `http://localhost:8080/enrollments/${enrollmentId}`,
                 {
                     method: 'DELETE',
+                    headers: {
+                        'Authorization': jwt
+                    }
                 }
             );
             if (!response.ok) {
