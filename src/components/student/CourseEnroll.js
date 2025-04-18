@@ -22,6 +22,7 @@ const CourseEnroll = (props) => {
     const [currentEnrollments, setCurrentEnrollments] = useState([])
     const tableHeaders = ["Course Id", "Title", "Semester", "Days+Times", "Instructor Name", "Instructor Email", "Building", "Room", "Sec No", ""]
     const jwt = sessionStorage.getItem('jwt')
+    console.log(jwt)
     const getOpenSections = async()=>{
         try{
             let response = await fetch(`${SERVER_URL}/sections/open`, 
@@ -33,6 +34,7 @@ const CourseEnroll = (props) => {
                 }
             )
             const courses = await response.json()
+            console.log(courses)
             if(response.status === 200){
                 setOpenSections(courses)
                 console.log(courses)
