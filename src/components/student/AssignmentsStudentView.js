@@ -11,12 +11,21 @@ import {SERVER_URL} from "../../Constants";
 const AssignmentsStudentView = (props) => {
 
     const [ assignments, setAssignments ] = useState([ ]);
-
+    const [year, setYear] = useState()
+    const [semester, setSemester] = useState()
     const [ message, setMessage ] = useState('');
-
-    const  fetchAssignments = async () => {
+    
+    const jwt = sessionStorage.getItem('jwt')
+    console.log(jwt)
+    const  fetchAssignments = async(e) => {
+        e.preventDefault()
         try {
-            const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=2025&semester=Spring`);
+            const response = await fetch(`${SERVER_URL}/assignments?year=${year}&semester=${semester}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': jwt,
+                }
+            });
             if (response.ok) {
                 const assignments = await response.json();
                 setAssignments(assignments);
@@ -29,25 +38,34 @@ const AssignmentsStudentView = (props) => {
             setMessage("network error: "+err);
         }
     }
-    useEffect( () => {
-        fetchAssignments();
-    },  []);
      
     return(
         <>
+            <>
+            <h2>Enter year and semester to view assignments for </h2>
+            <form onSubmit={(e)=>{
+                fetchAssignments(e)
+            }}>
+                Year: <input type="text" value={year} onChange={(e)=>setYear(e.target.value)}></input><br></br>
+                Semester: <input type="text" value={semester} onChange={(e)=>setSemester(e.target.value)}></input><br></br>
+                <input type='submit'></input>
+            </form>
+            </>
+        { assignments && (
+            <>
             <h1>Assignments</h1>
             <table className="Center">
                 <thead>
                 <tr>
-      <th>Course ID</th>
-      <th>Assignment Title</th>
-      <th>Due Date</th>
-      <th>Score</th>
+                    <th>Course ID</th>
+                    <th>Assignment Title</th>
+                    <th>Due Date</th>
+                    <th>Score</th>
                 </tr>
                 </thead>
                 <tbody>
-                {assignments.map((a) => (
-                    <tr key={a.assignmentId}>
+                {assignments.map((a, idx) => (
+                    <tr key={idx}>
                         <td>{a.courseId}</td>
                         <td>{a.title}</td>
                         <td>{a.dueDate}</td>
@@ -56,6 +74,9 @@ const AssignmentsStudentView = (props) => {
                 ))}
                 </tbody>
             </table>
+            </>
+        )
+        }
         </>
     );
 }

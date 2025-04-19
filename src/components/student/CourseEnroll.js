@@ -21,10 +21,20 @@ const CourseEnroll = (props) => {
     const [openConfirmUnEnrollment, setOpenConfirmUnEnrollment] = useState(false)
     const [currentEnrollments, setCurrentEnrollments] = useState([])
     const tableHeaders = ["Course Id", "Title", "Semester", "Days+Times", "Instructor Name", "Instructor Email", "Building", "Room", "Sec No", ""]
+    const jwt = sessionStorage.getItem('jwt')
+    console.log(jwt)
     const getOpenSections = async()=>{
         try{
-            let response = await fetch(`${SERVER_URL}/sections/open`)
+            let response = await fetch(`${SERVER_URL}/sections/open`, 
+                {
+                    method: 'GET',
+                    headers:{
+                        'Authorization': jwt
+                    }
+                }
+            )
             const courses = await response.json()
+            console.log(courses)
             if(response.status === 200){
                 setOpenSections(courses)
                 console.log(courses)
@@ -39,7 +49,13 @@ const CourseEnroll = (props) => {
 
     const getMyEnrollments = async()=>{
         try{
-            let response  = await fetch(`${SERVER_URL}/transcripts?studentId=3`)
+            let response  = await fetch(`${SERVER_URL}/transcripts`, 
+                {
+                    method: 'GET',
+                    headers:{
+                        'Authorization': jwt
+                    }
+                })
             if (response.status === 200){
                 let data = await response.json()
                 setCurrentEnrollments(data)
@@ -53,10 +69,11 @@ const CourseEnroll = (props) => {
     }
     const enrollMe = async(secNo)=>{
         try{
-            let response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}?studentId=3`, 
+            let response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}`, 
                 {
                     method: 'POST',
                     headers: {
+                        'Authorization': jwt,
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(enrollingSection)
@@ -78,6 +95,7 @@ const CourseEnroll = (props) => {
                 {
                     method: 'DELETE',
                     headers: {
+                        'Authorization': jwt,
                         'Content-Type': 'application/json',
                     },
                 }
