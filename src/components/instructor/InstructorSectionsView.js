@@ -23,7 +23,7 @@ const InstructorSectionsView = (props) => {
 
     const whoAmI = async() =>{
         try{
-            let response = await fetch(`${SERVER_URL}/user?email=dwisneski@csumb.edu`)
+            let response = await fetch(`${SERVER_URL}/user`)
             let data = await response.json()
             setMyName(data.name.split(' ').map(word=>{return word.charAt(0).toUpperCase()+word.slice(1)}).join(' '))
         }catch(err){
@@ -33,7 +33,7 @@ const InstructorSectionsView = (props) => {
 
     const getSections = async()=>{
         try{
-            let response = await fetch(`${SERVER_URL}/sections?email=dwisneski@csumb.edu&year=${term.year}&semester=${term.semester}`)
+            let response = await fetch(`${SERVER_URL}/sections?year=${term.year}&semester=${term.semester}`)
             if (response.status === 200){
                 let data = await response.json()
                 setSections(data)
