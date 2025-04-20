@@ -21,9 +21,15 @@ const InstructorSectionsView = (props) => {
     const location = useLocation()
     const term = location.state
 
+    const jwt = sessionStorage.getItem('jwt')
     const whoAmI = async() =>{
         try{
-            let response = await fetch(`${SERVER_URL}/user?email=dwisneski@csumb.edu`)
+            let response = await fetch(`${SERVER_URL}/user`, {
+                method: 'GET',
+                headers:{
+                    'Authorization': jwt
+                }
+            })
             let data = await response.json()
             setMyName(data.name.split(' ').map(word=>{return word.charAt(0).toUpperCase()+word.slice(1)}).join(' '))
         }catch(err){
@@ -33,7 +39,12 @@ const InstructorSectionsView = (props) => {
 
     const getSections = async()=>{
         try{
-            let response = await fetch(`${SERVER_URL}/sections?email=dwisneski@csumb.edu&year=${term.year}&semester=${term.semester}`)
+            let response = await fetch(`${SERVER_URL}/sections?year=${term.year}&semester=${term.semester}`, {
+                method: 'GET',
+                headers:{
+                    'Authorization': jwt
+                }
+            })
             if (response.status === 200){
                 let data = await response.json()
                 setSections(data)
