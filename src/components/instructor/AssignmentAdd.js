@@ -16,6 +16,8 @@ const AssignmentAdd = (props)  => {
     const [openDialog, setOpenDialog] = useState(false)
     const [assignment, setAssingment] = useState({secNo: props.secNo, title: '', dueDate: ''})
     const [errorMessage, setErrorMessage] = useState("")
+    const jwt = sessionStorage.getItem('jwt')
+
     const addAssignment = async()=>{
         if (assignment.title == "" || assignment.dueDate == ""){
             setErrorMessage("All fields need to be filled out")
@@ -27,6 +29,8 @@ const AssignmentAdd = (props)  => {
                         method: "POST",
                         headers:{
                         'Content-Type': 'application/json',
+                        'Authorization': jwt,
+
                         },
                         body: JSON.stringify(assignment)
                     })

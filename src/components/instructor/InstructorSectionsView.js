@@ -16,26 +16,26 @@ import { Link } from 'react-router-dom';
 
 const InstructorSectionsView = (props) => {
     const [sections, setSections] = useState([])
-    const [myName, setMyName] = useState("")
+    // const [myName, setMyName] = useState("")
     const tableHeaders = ["Section No", "Section ID", "Course Id", "Title", "Semester", "Days+Times", "Building", "Room", "Sec No", "", ""]
     const location = useLocation()
     const term = location.state
 
     const jwt = sessionStorage.getItem('jwt')
-    const whoAmI = async() =>{
-        try{
-            let response = await fetch(`${SERVER_URL}/user`, {
-                method: 'GET',
-                headers:{
-                    'Authorization': jwt
-                }
-            })
-            let data = await response.json()
-            setMyName(data.name.split(' ').map(word=>{return word.charAt(0).toUpperCase()+word.slice(1)}).join(' '))
-        }catch(err){
-            alert(`${err}`)
-        }
-    }
+    // const whoAmI = async() =>{
+    //     try{
+    //         let response = await fetch(`${SERVER_URL}/user`, {
+    //             method: 'GET',
+    //             headers:{
+    //                 'Authorization': jwt
+    //             }
+    //         })
+    //         let data = await response.json()
+    //         setMyName(data.name.split(' ').map(word=>{return word.charAt(0).toUpperCase()+word.slice(1)}).join(' '))
+    //     }catch(err){
+    //         alert(`${err}`)
+    //     }
+    // }
 
     const getSections = async()=>{
         try{
@@ -57,12 +57,12 @@ const InstructorSectionsView = (props) => {
     }
     useEffect(()=>{
         getSections()
-        whoAmI()
+        // whoAmI()
     }, [])
      
     return(
         <> 
-           <h2>Viewing sections taught by {myName}</h2>
+           <h2>Viewing sections</h2>
            <table className='Center'>
             <thead>
             <tr>

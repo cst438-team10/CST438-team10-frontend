@@ -24,10 +24,16 @@ const AssignmentGrade = (props) => {
     const [openDialog, setOpenDialog] = useState(false);
     const [assignment, setAssingment] = useState(props.assignment);
     const tableHeaders = ["GradeId", "Student", "Student Email", "Score"]
+    const jwt = sessionStorage.getItem('jwt')
 
     const fetchGrades = async () => {
         try {
-            let response = await fetch(`${SERVER_URL}/assignments/${assignment.id}/grades`);
+            let response = await fetch(`${SERVER_URL}/assignments/${assignment.id}/grades`, {
+                method: 'GET', 
+                headers:{
+                    'Authorization': jwt,
+                }
+            });
             if (response.ok) {
                 let data = await response.json();
                 setGrades(data);
@@ -46,6 +52,8 @@ const AssignmentGrade = (props) => {
                 method: "PUT",
                 headers:{
                     'Content-Type': 'application/json',
+                    'Authorization': jwt,
+
                 },
                 body: JSON.stringify(grades)
             })
