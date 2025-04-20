@@ -11,7 +11,7 @@ import AssignmentsView from './AssignmentsView';
 export const InstructorRouter = (props) => {
 
   const jwt = sessionStorage.getItem('jwt')
-  console.log(jwt)
+
   return (
   <div className="App">
   <BrowserRouter>

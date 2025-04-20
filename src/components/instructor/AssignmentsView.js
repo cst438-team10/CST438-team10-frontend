@@ -25,9 +25,16 @@ const AssignmentsView = () => {
     const location = useLocation()
     const {secNo, title} = location.state || {}
     const tableHeaders = ["Id", "Title", "Due Date", "", "", ""]
+    const jwt = sessionStorage.getItem('jwt')
+
+
     const getAssignments = async()=>{
         try{
-            let response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`)
+            let response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`, {
+            method: 'GET', 
+            headers:{
+                'Authorization': jwt,
+            }})
             if(response.status === 200){
                 let data = await response.json()
                 setAssignments(data)
@@ -44,6 +51,8 @@ const AssignmentsView = () => {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': jwt,
+
                     }})
             if (response.status === 200){
                 getAssignments()

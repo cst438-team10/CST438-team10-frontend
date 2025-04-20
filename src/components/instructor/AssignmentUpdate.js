@@ -13,6 +13,8 @@ const AssignmentUpdate = (props)  => {
     const [openDialog, setOpenDialog] = useState(false)
     const [assignment, setAssingment] = useState(props.assignment)
 
+    const jwt = sessionStorage.getItem('jwt')
+
     const saveEdit = async()=>{
       try{
         let response = await fetch(`${SERVER_URL}/assignments`,
@@ -20,6 +22,8 @@ const AssignmentUpdate = (props)  => {
             method: "PUT",
             headers:{
               'Content-Type': 'application/json',
+              'Authorization': jwt,
+
             },
             body: JSON.stringify(assignment)
           })

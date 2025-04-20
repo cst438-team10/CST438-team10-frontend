@@ -16,10 +16,17 @@ const EnrollmentsView = (props) => {
     const [enrollments, setEnrollments] = useState([]);
     const [grades, setGrades ] = useState({});
 
+
+    const jwt = sessionStorage.getItem('jwt')
     // fetch enrollments
     // --
     useEffect(() => {
-        fetch(`http://localhost:8080/sections/${secNo}/enrollments`)
+        fetch(`http://localhost:8080/sections/${secNo}/enrollments`, {
+            method: 'GET', 
+            headers:{
+                'Authorization': jwt,
+            }
+        })
         .then(response => {
             if(!response.ok){
                 throw new Error('failed to fetch enrollments');
@@ -58,7 +65,8 @@ const EnrollmentsView = (props) => {
             const response = await fetch('http://localhost:8080/enrollments', {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': jwt,
                 },
                 body: JSON.stringify(updatedEnrollments)
             });
